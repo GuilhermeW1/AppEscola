@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author guilherme.w1
@@ -16,6 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);//JANELA MAXIMIZADA
     }
 
     /**
@@ -29,7 +32,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Tela Principal");
 

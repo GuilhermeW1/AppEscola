@@ -54,7 +54,7 @@ public class Tela_login extends javax.swing.JFrame {
             .addGap(0, 102, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -155,7 +155,7 @@ public class Tela_login extends javax.swing.JFrame {
             if(existe){
                TelaPrincipal tela = new TelaPrincipal();
                tela.setVisible(true);
-               dispose();
+               dispose();//fecha a tela
             }
         
         }catch(Exception e ){

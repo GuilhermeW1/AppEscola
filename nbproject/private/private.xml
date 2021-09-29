@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/tools/CaixaDeDialogo.java</file>
             <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/model/Usuario.java</file>
+            <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/view/TelaPrincipal.java</file>
+            <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/controller/UsuarioConttroler.java</file>
             <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/tools/Tools.java</file>
             <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/database/Conexao.java</file>
+            <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/view/TelaUsuarios.java</file>
             <file>file:/C:/Users/guilherme.w1/Documents/NetBeansProjects/App/src/view/Tela_login.java</file>
         </group>
     </open-files>
