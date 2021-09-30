@@ -41,6 +41,8 @@ public class TelaUsuarios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnExcluirUsuario_tela_usuario = new javax.swing.JButton();
+        txtExcluir_tela_usuarios = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +69,15 @@ public class TelaUsuarios extends javax.swing.JFrame {
             }
         });
 
+        btnExcluirUsuario_tela_usuario.setText("Excluir usuario");
+        btnExcluirUsuario_tela_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirUsuario_tela_usuarioActionPerformed(evt);
+            }
+        });
+
+        txtExcluir_tela_usuarios.setText("Id do usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,29 +90,36 @@ public class TelaUsuarios extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(jLabel1))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(37, 37, 37)
-                                            .addComponent(jLabel4)))
-                                    .addGap(115, 115, 115)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel5))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(37, 37, 37)
+                                                .addComponent(jLabel4)))
+                                        .addGap(115, 115, 115)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel5))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnExcluirUsuario_tela_usuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(txtExcluir_tela_usuarios)
+                                        .addGap(36, 36, 36))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(jButton1)))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,22 +129,26 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(36, 36, 36)
-                .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtExcluir_tela_usuarios))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel2)
-                .addGap(29, 29, 29)
-                .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluirUsuario_tela_usuario))
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addGap(26, 26, 26)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,6 +187,12 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private void txtNome_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNome_tela_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNome_tela_usuarioActionPerformed
+
+    private void btnExcluirUsuario_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUsuario_tela_usuarioActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnExcluirUsuario_tela_usuarioActionPerformed
     
     private boolean validarDados(){
         
@@ -256,6 +284,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExcluirUsuario_tela_usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -264,6 +293,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField pass1_tela_usuario;
     private javax.swing.JPasswordField pass2_tela_usuario;
+    private javax.swing.JLabel txtExcluir_tela_usuarios;
     private javax.swing.JTextField txtLogin_tela_usuario;
     private javax.swing.JTextField txtNome_tela_usuario;
     // End of variables declaration//GEN-END:variables

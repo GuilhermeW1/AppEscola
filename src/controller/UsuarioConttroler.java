@@ -115,10 +115,14 @@ public class UsuarioConttroler {
         return false;
     }
     
-    public void excluir(int){
+    public void excluir(int id){
         try{
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
+            ResultSet rs = null;
+            String sql = "delete";
+                    
+            
         
         
         }catch(SQLException e){
