@@ -6,6 +6,7 @@
 package view;
 
 import javax.swing.JFrame;
+import tools.CaixaDeDialogo;
 
 /**
  *
@@ -31,10 +32,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuUsuarios_tela_principal = new javax.swing.JMenuItem();
+        menuSair_tela_principal = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Tela Principal");
+        jMenu1.setText("Cadastros");
+
+        menuUsuarios_tela_principal.setText("Usuários");
+        menuUsuarios_tela_principal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUsuarios_tela_principalActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuUsuarios_tela_principal);
+
+        jMenuBar1.add(jMenu1);
+
+        menuSair_tela_principal.setText("Sair");
+        menuSair_tela_principal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSair_tela_principalActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuSair_tela_principal);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,18 +68,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(304, 304, 304)
                 .addComponent(jLabel1)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jLabel1)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuSair_tela_principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSair_tela_principalActionPerformed
+        try{
+            boolean resposta = CaixaDeDialogo.obterinstancia().pedirConfirmacao("Deseja mesmo Sair", "confirmação", 'p');
+            if(resposta){
+                System.exit(0);
+            }
+            
+        }catch(Exception e){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair");}
+    }//GEN-LAST:event_menuSair_tela_principalActionPerformed
+
+    private void menuUsuarios_tela_principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarios_tela_principalActionPerformed
+        TelaUsuarios tela = new TelaUsuarios();
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_menuUsuarios_tela_principalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,5 +135,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuSair_tela_principal;
+    private javax.swing.JMenuItem menuUsuarios_tela_principal;
     // End of variables declaration//GEN-END:variables
 }

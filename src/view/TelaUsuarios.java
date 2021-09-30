@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.UsuarioConttroler;
+import model.Usuario;
+import tools.CaixaDeDialogo;
+
 /**
  *
  * @author guilherme.w1
@@ -28,12 +32,12 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome_tela_usuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtLogin_tela_usuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        pass1_tela_usuario = new javax.swing.JPasswordField();
+        pass2_tela_usuario = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -42,17 +46,15 @@ public class TelaUsuarios extends javax.swing.JFrame {
 
         jLabel1.setText("Nome");
 
-        jTextField1.setText("jTextField1");
+        txtNome_tela_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNome_tela_usuarioActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Login");
 
-        jTextField2.setText("jTextField2");
-
         jLabel4.setText("Senha");
-
-        jPasswordField1.setText("jPasswordField1");
-
-        jPasswordField2.setText("jPasswordField2");
 
         jLabel5.setText("Confirmar Senha ");
 
@@ -75,21 +77,24 @@ public class TelaUsuarios extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(58, 58, 58)
-                                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel4)
-                                .addGap(115, 115, 115)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(37, 37, 37)
+                                            .addComponent(jLabel4)))
+                                    .addGap(115, 115, 115)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel5))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jLabel2))
@@ -106,19 +111,19 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(36, 36, 36)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jLabel2)
                 .addGap(29, 29, 29)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -128,10 +133,93 @@ public class TelaUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //salvar no banco de dados 
+        boolean retorno = validarDados();
+        
+        if(retorno){
+            
+            Usuario usuario = guardarDados();
+            
+            UsuarioConttroler objController = new UsuarioConttroler();
+            objController.incluir(usuario);
+            
+        }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    private Usuario guardarDados(){
+        try{
+            Usuario objeto = new Usuario();
+            
+            objeto.setLogin(txtLogin_tela_usuario.getText().trim());
+            objeto.setNome(txtNome_tela_usuario.getText().trim());
+            objeto.setSenha(pass1_tela_usuario.getText());
+            return objeto;
+        }catch(Exception e){
+            return null;
+        }
+    }
+    
+    
+    
+    private void txtNome_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNome_tela_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNome_tela_usuarioActionPerformed
+    
+    private boolean validarDados(){
+        
+        if(txtNome_tela_usuario.getText().trim().equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um Nome");
+            return false;
+        }
+        if(txtLogin_tela_usuario.getText().trim().equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um Login");
+            return false;
+        }
+        
+        int indice = txtLogin_tela_usuario.getText().indexOf(" ");
+       if(indice >= 0){
+           CaixaDeDialogo.obterinstancia().exibirMensagem("Login sem espaços");
+       }
+       if(pass1_tela_usuario.getText().trim().equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Senha 1 em branco");
+            return false;
+        }
+       if(pass2_tela_usuario.getText().trim().equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Senha 2 em branco");
+            return false;
+        }
+       if(!pass1_tela_usuario.getText().trim().equals(pass2_tela_usuario.getText())){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Senha 1 em branco");
+            return false;
+        }
+       
+       return true;
+            
+        
+        
+        /*if(txtLogin_tela_usuario.equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um Login");
+            return false;
+        }else if(txtNome_tela_usuario.equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um nome");
+            return false;
+        }else if(pass1_tela_usuario.equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe uma senha");
+            return false;
+        }else if(pass2_tela_usuario.equals("")){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe uma senha");
+            return false;
+        }else if(pass1_tela_usuario != pass2_tela_usuario){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Senha um diferente da senha 2");
+            return false;
+        }
+        
+            return true;
+        */
+    }
+        
+    
     /**
      * @param args the command line arguments
      */
@@ -174,9 +262,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField pass1_tela_usuario;
+    private javax.swing.JPasswordField pass2_tela_usuario;
+    private javax.swing.JTextField txtLogin_tela_usuario;
+    private javax.swing.JTextField txtNome_tela_usuario;
     // End of variables declaration//GEN-END:variables
 }

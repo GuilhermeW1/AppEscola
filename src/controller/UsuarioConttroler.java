@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import model.Usuario;
 
 /**
  *
@@ -63,5 +64,70 @@ public class UsuarioConttroler {
         }
 
     }
+    
+    public boolean incluir(Usuario objeto){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+            
+            if(verificarExistencia(objeto) == true){
+                return false;
+            }else{
+            
+            String wSQL = "INSERT INTO usuarios values(default, ?, ?, md5(md5(encode(?::bytea, 'base64'))))";
+            stmt = con.prepareStatement(wSQL);
+            stmt.setString(1, objeto.getNome());
+            stmt.setString(2, objeto.getLogin());
+            stmt.setString(3, objeto.getSenha());
+            
+            
+            stmt.executeUpdate();
+        }  
+        }catch(SQLException e){
+            System.out.println("erro sql: "+e.getMessage() );
+            return false;
+        }catch(Exception e){
+            System.out.println("Erro " +e.getMessage());
+            return false;
+        }finally{
+            return true;
+        }
+    }
+    
+    private boolean verificarExistencia(Usuario objeto){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            String sql = "select id from usuarios where login = ?" ;
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, objeto.getLogin());
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            return false;
+        }catch(SQLException e){
+            System.out.println("ERRO SQL: "+e.getMessage());
+        }catch(Exception e){
+            System.out.println("ERRO: " + e.getMessage());
+        } 
+        return false;
+    }
+    
+    public void excluir(int){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+        
+        
+        }catch(SQLException e){
+            System.out.println("erro sql: "+e.getMessage());
+        }catch(Exception e ){
+            System.out.println("Erro" +e.getMessage());
+        }
+        
+    }
+    
 
 }
