@@ -43,6 +43,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnExcluirUsuario_tela_usuario = new javax.swing.JButton();
         txtExcluir_tela_usuarios = new javax.swing.JLabel();
+        txtexcluirUsuarioById_tela_usuarios = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,7 +112,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnExcluirUsuario_tela_usuario, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(txtExcluir_tela_usuarios)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtexcluirUsuarioById_tela_usuarios)
+                                            .addComponent(txtExcluir_tela_usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(36, 36, 36))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
@@ -132,7 +135,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtExcluir_tela_usuarios))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtexcluirUsuarioById_tela_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -154,6 +159,8 @@ public class TelaUsuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //botão de salvar novos usuarios    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean retorno = validarDados();
         
@@ -164,6 +171,12 @@ public class TelaUsuarios extends javax.swing.JFrame {
             UsuarioConttroler objController = new UsuarioConttroler();
             objController.incluir(usuario);
             
+            txtLogin_tela_usuario.setText("");
+            txtNome_tela_usuario.setText("");
+            pass1_tela_usuario.setText("");
+            pass2_tela_usuario.setText("");
+            
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario criado com sucesso");
         }
         
         
@@ -187,12 +200,42 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private void txtNome_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNome_tela_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNome_tela_usuarioActionPerformed
-
+    
+    
+    //BOTAO PARA EXCLUIR USUARIOS UTILIZANDO O ID
     private void btnExcluirUsuario_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUsuario_tela_usuarioActionPerformed
-        
+        try{
+            Usuario usuario = guardarId();
+            
+            
+            
+            UsuarioConttroler cont = new UsuarioConttroler();
+            
+            cont.excluir(usuario);
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario excluido com sucesso");
+            
+            
+        }catch(Exception e){
+             System.out.println("Erro" +e.getMessage());
+            
+        }
         
         
     }//GEN-LAST:event_btnExcluirUsuario_tela_usuarioActionPerformed
+    
+    
+    private Usuario guardarId(){
+        try{
+        Usuario objeto = new Usuario();
+           
+        objeto.setId(Integer.parseInt(txtexcluirUsuarioById_tela_usuarios.getText()));
+        return objeto;
+        }catch(NumberFormatException e){
+            System.out.println("guardarID ERRO: "+e.getMessage());
+            return null;
+        }
+        
+    }
     
     private boolean validarDados(){
         
@@ -296,5 +339,6 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel txtExcluir_tela_usuarios;
     private javax.swing.JTextField txtLogin_tela_usuario;
     private javax.swing.JTextField txtNome_tela_usuario;
+    private javax.swing.JTextField txtexcluirUsuarioById_tela_usuarios;
     // End of variables declaration//GEN-END:variables
 }

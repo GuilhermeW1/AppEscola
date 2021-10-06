@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Usuario;
+import tools.CaixaDeDialogo;
 
 /**
  *
@@ -114,20 +115,42 @@ public class UsuarioConttroler {
         } 
         return false;
     }
-    
-    public void excluir(int id){
+    /*
+    private boolean verificarExistenciById(Usuario objeto){
+        try{
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt =null;
+            ResultSet rs =null;
+            String sql = "select from usuarios where id = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, objeto.getId());
+            
+            
+            
+            
+        }catch(SQLException e){
+            System.out.println("ERRO SQL: "+e.getMessage());
+        }catch(Exception e){
+            System.out.println("ERRO: " + e.getMessage());
+        } 
+    }
+    */
+    public void excluir(Usuario objeto){
         try{
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            String sql = "delete";
-                    
+            String sql = "delete from usuarios where id = ?";
             
-        
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, objeto.getId());
+            stmt.executeUpdate();
+            
+            
         
         }catch(SQLException e){
             System.out.println("erro sql: "+e.getMessage());
-        }catch(Exception e ){
+        }catch(Exception e){
             System.out.println("Erro" +e.getMessage());
         }
         
