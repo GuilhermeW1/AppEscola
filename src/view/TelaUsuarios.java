@@ -264,9 +264,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
             txtNome_tela_usuario.setText("");
             pass1_tela_usuario.setText("");
             pass2_tela_usuario.setText("");
-            
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario criado com sucesso");
             atualizarTabela();
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario criado com sucesso");
+           
         }
         
         
@@ -306,7 +306,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNome_tela_usuarioActionPerformed
     
-    
+    /*
     //BOTAO PARA EXCLUIR USUARIOS UTILIZANDO O ID
     private void btnExcluirUsuario_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUsuario_tela_usuarioActionPerformed
         try{
@@ -329,7 +329,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnExcluirUsuario_tela_usuarioActionPerformed
-
+    */
     private void pass2_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass2_tela_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pass2_tela_usuarioActionPerformed
@@ -361,7 +361,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
                         objUsuarioConttroler = new UsuarioConttroler();
                         boolean retorno = objUsuarioConttroler.excluir(codigo);
                         if(retorno){
+                            atualizarTabela();
                             CaixaDeDialogo.obterinstancia().exibirMensagem("Registro excluído com sucesso");
+                            
                         }else{
                             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir");
                         }

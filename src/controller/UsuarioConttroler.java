@@ -144,7 +144,7 @@ public class UsuarioConttroler {
 
             stmt = con.prepareStatement(sql);
             //se pa tem que muda pra
-            stmt.setString(1, codigo);
+            stmt.setInt(1, Integer.parseInt(codigo));
             
             stmt.executeUpdate();
             return true;
@@ -168,7 +168,7 @@ public class UsuarioConttroler {
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector(); //receber os dados do banco
 
-        cabecalhos.add("#");
+        cabecalhos.add("Id");
         cabecalhos.add("Nome");
         cabecalhos.add("Exc");
 
@@ -176,7 +176,7 @@ public class UsuarioConttroler {
 
         try {
 
-            String wSql = " SELECT id, nome  FROM usuarios ORDER BY nome ";
+            String wSql = " SELECT id, nome FROM usuarios WHERE COALESCE(excluido,false) = false ORDER BY nome ";
 
             result = Conexao.stmt.executeQuery(wSql);
 
