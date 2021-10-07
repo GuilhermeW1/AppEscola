@@ -42,15 +42,14 @@ public class UsuarioConttroler {
             Connection con = Conexao.getConnection();
             ResultSet rs = null;
             PreparedStatement smt = null;
-            
-            
-            String wSql = "select from usuarios where login = ? and senha = md5(encode(?::bytea, 'base64'))";
+
+            String wSql = "select from usuarios where coalesce(excluido, false) = false and login = ? and senha = md5(encode(?::bytea, 'base64'))";
             //stm.executeQuery(wSql);
-            
+
             smt = con.prepareStatement(wSql);
             smt.setString(1, user);
             smt.setString(2, pass);
-            
+
             rs = smt.executeQuery();
 
             //objUsuario = new Usuario();
@@ -65,56 +64,57 @@ public class UsuarioConttroler {
         }
 
     }
-    
-    public boolean incluir(Usuario objeto){
-        try{
+
+    public boolean incluir(Usuario objeto) {
+        try {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
-            
-            if(verificarExistencia(objeto) == true){
+
+            if (verificarExistencia(objeto) == true) {
                 return false;
-            }else{
-            
-            String wSQL = "INSERT INTO usuarios values(default, ?, ?, md5(md5(encode(?::bytea, 'base64'))))";
-            stmt = con.prepareStatement(wSQL);
-            stmt.setString(1, objeto.getNome());
-            stmt.setString(2, objeto.getLogin());
-            stmt.setString(3, objeto.getSenha());
-            
-            
-            stmt.executeUpdate();
-        }  
-        }catch(SQLException e){
-            System.out.println("erro sql: "+e.getMessage() );
+            } else {
+
+                String wSQL = "INSERT INTO usuarios values(default, ?, ?, md5(md5(encode(?::bytea, 'base64'))), false)";
+                stmt = con.prepareStatement(wSQL);
+                stmt.setString(1, objeto.getNome());
+                stmt.setString(2, objeto.getLogin());
+                stmt.setString(3, objeto.getSenha());
+                
+
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println("erro sql: " + e.getMessage());
             return false;
-        }catch(Exception e){
-            System.out.println("Erro " +e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro " + e.getMessage());
             return false;
-        }finally{
+        } finally {
             return true;
         }
     }
-    
-    private boolean verificarExistencia(Usuario objeto){
-        try{
+
+    private boolean verificarExistencia(Usuario objeto) {
+        try {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            String sql = "select id from usuarios where login = ?" ;
+            String sql = "select id from usuarios where login = ?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, objeto.getLogin());
             rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
             }
             return false;
-        }catch(SQLException e){
-            System.out.println("ERRO SQL: "+e.getMessage());
-        }catch(Exception e){
+        } catch (SQLException e) {
+            System.out.println("ERRO SQL: " + e.getMessage());
+        } catch (Exception e) {
             System.out.println("ERRO: " + e.getMessage());
-        } 
+        }
         return false;
     }
+
     /*
     private boolean verificarExistenciById(Usuario objeto){
         try{
@@ -134,27 +134,156 @@ public class UsuarioConttroler {
             System.out.println("ERRO: " + e.getMessage());
         } 
     }
-    */
-    public void excluir(Usuario objeto){
-        try{
+     */
+    public boolean excluir(String codigo) {
+        try {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            String sql = "delete from usuarios where id = ?";
-            
+            String sql = "update usuarios set excluido = true where id = ?";
+
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1, objeto.getId());
+            //se pa tem que muda pra
+            stmt.setString(1, codigo);
+            
             stmt.executeUpdate();
-            
-            
-        
-        }catch(SQLException e){
-            System.out.println("erro sql: "+e.getMessage());
-        }catch(Exception e){
-            System.out.println("Erro" +e.getMessage());
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("erro sql: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Erro" + e.getMessage());
+            return false;
         }
-        
+
     }
     
+    //////////////////////////////////////////////////////////////////////
+    
+    public void preencher(JTable jtbUsuarios) {
+
+        Conexao.abreConexao();
+
+        Vector<String> cabecalhos = new Vector<String>();
+        Vector dadosTabela = new Vector(); //receber os dados do banco
+
+        cabecalhos.add("#");
+        cabecalhos.add("Nome");
+        cabecalhos.add("Exc");
+
+        ResultSet result = null;
+
+        try {
+
+            String wSql = " SELECT id, nome  FROM usuarios ORDER BY nome ";
+
+            result = Conexao.stmt.executeQuery(wSql);
+
+            Vector<Object> linha;
+            while (result.next()) {
+                linha = new Vector<Object>();
+
+                linha.add(result.getInt(1));
+                linha.add(result.getString(2));
+                linha.add("X");
+
+                dadosTabela.add(linha);
+            }
+
+        } catch (Exception e) {
+            System.out.println("problemas para popular tabela...");
+            System.out.println(e);
+        }
+
+        jtbUsuarios.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+            // permite seleção de apenas uma linha da tabela
+        });
+
+        // permite seleção de apenas uma linha da tabela
+        jtbUsuarios.setSelectionMode(0);
+
+        // redimensiona as colunas de uma tabela
+        TableColumn column = null;
+        for (int i = 0; i <= 2; i++) {
+            column
+                    = jtbUsuarios.getColumnModel().getColumn(i);
+            switch (i) {
+                case 0:
+                    column.setPreferredWidth(60);
+                    break;
+                case 1:
+                    column.setPreferredWidth(200);
+                    break;
+                case 3:
+                    column.setPreferredWidth(10);
+                    break;
+            }
+        }
+
+        //função para deixar a tabela zebrada
+        jtbUsuarios.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected,
+                        hasFocus, row, column);
+                if (row % 2 == 0) {
+                    setBackground(Color.LIGHT_GRAY);
+                } else {
+                    setBackground(Color.WHITE);
+                }
+
+                return this;
+            }
+        });
+        //return (true);
+    }
+    
+     public Usuario buscar(String codigo) {
+         Usuario objUsuario = null;
+        try {
+            Connection con = Conexao.getConnection();
+            ResultSet rs = null;
+            PreparedStatement smt = null;
+
+            String wSql = "select * from usuarios where id = ?";
+            //stm.executeQuery(wSql);
+
+            smt = con.prepareStatement(wSql);
+            smt.setInt(1, Integer.parseInt(codigo));
+            
+
+            rs = smt.executeQuery();
+
+            
+            if(rs.next()){
+                objUsuario = new Usuario();
+                objUsuario.setId(rs.getInt("id"));
+                objUsuario.setNome(rs.getString("nome"));
+                objUsuario.setLogin(rs.getString("login"));
+                objUsuario.setSenha(rs.getString("senha"));
+                objUsuario.setExcluir(rs.getBoolean("excluido"));
+                
+            }
+            
+            
+
+        } catch (SQLException ex) {
+            System.out.println("ERRO de SQL: " + ex.getMessage());
+            return null;
+        } catch (Exception e) {
+            System.out.println("ERRO: " + e.getMessage());
+            return null;
+        }
+        
+        return objUsuario;
+
+    }
 
 }

@@ -18,8 +18,13 @@ public class TelaUsuarios extends javax.swing.JFrame {
     /**
      * Creates new form TelaUsuarios
      */
+    
+    UsuarioConttroler objUsuarioConttroler;
+    
     public TelaUsuarios() {
         initComponents();
+        atualizarTabela();
+        
     }
 
     /**
@@ -31,44 +36,30 @@ public class TelaUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        txtExcluir_tela_usuarios = new javax.swing.JLabel();
+        txtexcluirUsuarioById_tela_usuarios = new javax.swing.JTextField();
+        btnExcluirUsuario_tela_usuario = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbUsuarios = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtNome_tela_usuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtLogin_tela_usuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         pass1_tela_usuario = new javax.swing.JPasswordField();
-        pass2_tela_usuario = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        pass2_tela_usuario = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        btnExcluirUsuario_tela_usuario = new javax.swing.JButton();
-        txtExcluir_tela_usuarios = new javax.swing.JLabel();
-        txtexcluirUsuarioById_tela_usuarios = new javax.swing.JTextField();
+        lblId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nome");
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtNome_tela_usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNome_tela_usuarioActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Login");
-
-        jLabel4.setText("Senha");
-
-        jLabel5.setText("Confirmar Senha ");
-
-        jLabel6.setText("Cadastro de Usuários");
-
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        txtExcluir_tela_usuarios.setText("Id do usuario");
 
         btnExcluirUsuario_tela_usuario.setText("Excluir usuario");
         btnExcluirUsuario_tela_usuario.addActionListener(new java.awt.event.ActionListener() {
@@ -77,83 +68,181 @@ public class TelaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        txtExcluir_tela_usuarios.setText("Id do usuario");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnExcluirUsuario_tela_usuario)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtexcluirUsuarioById_tela_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtExcluir_tela_usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(66, 66, 66))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(txtExcluir_tela_usuarios)
+                .addGap(27, 27, 27)
+                .addComponent(txtexcluirUsuarioById_tela_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluirUsuario_tela_usuario)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jtbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtbUsuariosMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtbUsuarios);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel6.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jLabel6.setText("Cadastro de Usuários");
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jLabel1.setText("Nome");
+
+        txtNome_tela_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNome_tela_usuarioActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jLabel2.setText("Login");
+
+        jLabel4.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jLabel4.setText("Senha");
+
+        jLabel5.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jLabel5.setText("Confirmar Senha ");
+
+        pass2_tela_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pass2_tela_usuarioActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lblId.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        lblId.setText("ID");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(136, 136, 136))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNome_tela_usuario)
+                                    .addComponent(txtLogin_tela_usuario)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(101, 101, 101)
+                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(53, 53, 53))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel6)
+                .addGap(43, 43, 43)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblId))
+                .addGap(18, 18, 18)
+                .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2)
+                .addGap(35, 35, 35)
+                .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGap(37, 37, 37)
-                                                .addComponent(jLabel4)))
-                                        .addGap(115, 115, 115)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnExcluirUsuario_tela_usuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtexcluirUsuarioById_tela_usuarios)
-                                            .addComponent(txtExcluir_tela_usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(36, 36, 36))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jButton1)))
-                .addGap(30, 30, 30))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtExcluir_tela_usuarios))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtexcluirUsuarioById_tela_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirUsuario_tela_usuario))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jButton1)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -177,6 +266,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
             pass2_tela_usuario.setText("");
             
             CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario criado com sucesso");
+            atualizarTabela();
         }
         
         
@@ -192,6 +282,21 @@ public class TelaUsuarios extends javax.swing.JFrame {
             return objeto;
         }catch(Exception e){
             return null;
+        }
+    }
+    
+    private void atualizarTabela() {
+        try {
+
+
+           UsuarioConttroler objUsuarioController = new UsuarioConttroler();
+            
+           
+            objUsuarioController.preencher(jtbUsuarios);
+
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
         }
     }
     
@@ -213,6 +318,8 @@ public class TelaUsuarios extends javax.swing.JFrame {
             
             cont.excluir(usuario);
             CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario excluido com sucesso");
+            initComponents();
+            txtexcluirUsuarioById_tela_usuarios.setText("");
             
             
         }catch(Exception e){
@@ -222,7 +329,72 @@ public class TelaUsuarios extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnExcluirUsuario_tela_usuarioActionPerformed
+
+    private void pass2_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass2_tela_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pass2_tela_usuarioActionPerformed
+
+    private void jtbUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbUsuariosMousePressed
+        // TODO add your handling code here:
+        try {
+
+
+            //pega a linha selecionada
+            int linhaSelecionada = jtbUsuarios.getSelectedRow();
+
+
+            // Primeira coluna da linha
+            String codigo = jtbUsuarios.getModel().getValueAt(linhaSelecionada, 0).toString();
+
+
+            //Verifica se clicou na coluna 3 => EXCLUIR
+            //buscar no banco de dados o registro e preencher nos campos da tela
+            objUsuarioConttroler = new UsuarioConttroler();
+            Usuario objeto = objUsuarioConttroler.buscar(codigo);
+                
+            if (jtbUsuarios.isColumnSelected(2)) {
+                try {
+                    boolean wPergunta = CaixaDeDialogo.obterinstancia()
+                            .pedirConfirmacao("Tem certeza de que deseja excluir?", "", 'p');
+                    if (wPergunta == true) {
+                        //exclusão do registro selecionado
+                        objUsuarioConttroler = new UsuarioConttroler();
+                        boolean retorno = objUsuarioConttroler.excluir(codigo);
+                        if(retorno){
+                            CaixaDeDialogo.obterinstancia().exibirMensagem("Registro excluído com sucesso");
+                        }else{
+                            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir");
+                        }
+                    }
+
+
+                    atualizarTabela();
+
+
+                } catch (Exception ex) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                }
+            } else {
+                if (objeto != null) {
+                    preencherCampos(objeto);
+                }
+            }
+
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), 'e');
+        }
+    }//GEN-LAST:event_jtbUsuariosMousePressed
     
+    private void preencherCampos(Usuario objeto){
+        try{
+            lblId.setText(String.valueOf(objeto.getId()));
+            txtLogin_tela_usuario.setText(objeto.getLogin());
+            txtNome_tela_usuario.setText(objeto.getNome());
+        }catch(Exception e){
+            
+        }
+    }
     
     private Usuario guardarId(){
         try{
@@ -321,7 +493,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new TelaUsuarios().setVisible(true);
+                
             }
         });
     }
@@ -334,6 +508,11 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtbUsuarios;
+    private javax.swing.JLabel lblId;
     private javax.swing.JPasswordField pass1_tela_usuario;
     private javax.swing.JPasswordField pass2_tela_usuario;
     private javax.swing.JLabel txtExcluir_tela_usuarios;

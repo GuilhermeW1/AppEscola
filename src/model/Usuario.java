@@ -15,6 +15,16 @@ public class Usuario {
     private String nome;
     private String login;
     private String senha;
+    private boolean excluir;
+
+    public boolean isExcluir() {
+        return excluir;
+    }
+
+    public void setExcluir(boolean excluir) {
+        this.excluir = excluir;
+    }
+     
 
     public int getId() {
         return id;
