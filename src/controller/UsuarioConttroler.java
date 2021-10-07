@@ -82,6 +82,7 @@ public class UsuarioConttroler {
                 
 
                 stmt.executeUpdate();
+                return true;
             }
         } catch (SQLException e) {
             System.out.println("erro sql: " + e.getMessage());
@@ -89,9 +90,9 @@ public class UsuarioConttroler {
         } catch (Exception e) {
             System.out.println("Erro " + e.getMessage());
             return false;
-        } finally {
-            return true;
-        }
+        } 
+            
+        
     }
 
     private boolean verificarExistencia(Usuario objeto) {

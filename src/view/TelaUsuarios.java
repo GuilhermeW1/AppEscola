@@ -258,7 +258,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
             Usuario usuario = guardarDados();
             
             UsuarioConttroler objController = new UsuarioConttroler();
-            objController.incluir(usuario);
+            if(objController.incluir(usuario)){
             
             txtLogin_tela_usuario.setText("");
             txtNome_tela_usuario.setText("");
@@ -266,7 +266,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
             pass2_tela_usuario.setText("");
             atualizarTabela();
             CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario criado com sucesso");
-           
+            }else {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Não criado");
+            }
         }
         
         
