@@ -94,6 +94,38 @@ public class UsuarioConttroler {
             
         
     }
+    
+    
+    
+    public boolean alterar(Usuario objeto) {
+        try {
+            Connection con = Conexao.getConnection();
+            PreparedStatement stmt = null;
+
+            if (verificarExistencia(objeto) == true) {
+                return false;
+            } else {
+
+                String wSQL = "update usuarios set nome = ?, senha = md5(md5(encode(?::bytea, 'base64'))) where id = ?";
+                stmt = con.prepareStatement(wSQL);
+                stmt.setString(1, objeto.getNome());
+                stmt.setString(2, objeto.getSenha());
+                stmt.setInt(3, objeto.getId());
+                
+
+                stmt.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("erro sql: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Erro " + e.getMessage());
+            return false;
+        } 
+            
+        
+    }
 
     private boolean verificarExistencia(Usuario objeto) {
         try {

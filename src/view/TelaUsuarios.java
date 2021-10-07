@@ -273,6 +273,15 @@ public class TelaUsuarios extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+   
+    public void limparTela(){
+        lblId.setText("");
+        txtLogin_tela_usuario.setText("");
+        txtLogin_tela_usuario.setEnabled(true);//libera a edição do campo
+        txtNome_tela_usuario.setText("");
+        pass1_tela_usuario.setText("");
+        pass2_tela_usuario.setText("");
+    }
     
     private Usuario guardarDados(){
         try{
