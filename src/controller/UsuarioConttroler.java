@@ -102,7 +102,7 @@ public class UsuarioConttroler {
             Connection con = Conexao.getConnection();
             PreparedStatement stmt = null;
 
-            if (verificarExistencia(objeto) == true) {
+            if (!verificarExistencia(objeto) == true) {
                 return false;
             } else {
 

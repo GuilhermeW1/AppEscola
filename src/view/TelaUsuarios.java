@@ -18,13 +18,14 @@ public class TelaUsuarios extends javax.swing.JFrame {
     /**
      * Creates new form TelaUsuarios
      */
-    
     UsuarioConttroler objUsuarioConttroler;
-    
+
     public TelaUsuarios() {
         initComponents();
         atualizarTabela();
+        System.out.println(" lblid "+lblId.getText());
         
+
     }
 
     /**
@@ -36,10 +37,6 @@ public class TelaUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        txtExcluir_tela_usuarios = new javax.swing.JLabel();
-        txtexcluirUsuarioById_tela_usuarios = new javax.swing.JTextField();
-        btnExcluirUsuario_tela_usuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbUsuarios = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -56,46 +53,6 @@ public class TelaUsuarios extends javax.swing.JFrame {
         lblId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtExcluir_tela_usuarios.setText("Id do usuario");
-
-        btnExcluirUsuario_tela_usuario.setText("Excluir usuario");
-        btnExcluirUsuario_tela_usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirUsuario_tela_usuarioActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnExcluirUsuario_tela_usuario)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtexcluirUsuarioById_tela_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtExcluir_tela_usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(66, 66, 66))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(txtExcluir_tela_usuarios)
-                .addGap(27, 27, 27)
-                .addComponent(txtexcluirUsuarioById_tela_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnExcluirUsuario_tela_usuario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jtbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,17 +186,13 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -248,99 +201,113 @@ public class TelaUsuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //botão de salvar novos usuarios    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean retorno = validarDados();
-        
-        if(retorno){
+
+        Usuario usuario;
+        UsuarioConttroler objController;
+
+        if (lblId.getText().equals("ID")) {
             
-            Usuario usuario = guardarDados();
-            
-            UsuarioConttroler objController = new UsuarioConttroler();
-            if(objController.incluir(usuario)){
-            
-            txtLogin_tela_usuario.setText("");
-            txtNome_tela_usuario.setText("");
-            pass1_tela_usuario.setText("");
-            pass2_tela_usuario.setText("");
-            atualizarTabela();
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario criado com sucesso");
-            }else {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Não criado");
+            System.out.println("criando");
+            boolean retorno = validarDados();
+            if (retorno) {
+
+                usuario = guardarDados();
+
+                objController = new UsuarioConttroler();
+                if (objController.incluir(usuario)) {
+
+                    limparTela();
+                    atualizarTabela();
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario criado com sucesso");
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Não criado");
+                }
             }
-        }
-        
-        
+
+            
+            ///////////////
+            
+           
+
+        } else {
+             boolean retorno = validarDados();
+            if (retorno) {
+                System.out.println("Alterando");
+                usuario = guardarDadosUpdate();
+                objController = new UsuarioConttroler();
+                if(objController.alterar(usuario) == true){
+                    limparTela();
+                    atualizarTabela();
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario alterado com sucesso");
+                }else{
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar usuario");
+                }
+                
+
+            }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
-   
-    public void limparTela(){
-        lblId.setText("");
+    }
+
+    public void limparTela() {
+        lblId.setText("ID");
         txtLogin_tela_usuario.setText("");
         txtLogin_tela_usuario.setEnabled(true);//libera a edição do campo
         txtNome_tela_usuario.setText("");
         pass1_tela_usuario.setText("");
         pass2_tela_usuario.setText("");
     }
-    
-    private Usuario guardarDados(){
-        try{
+
+    private Usuario guardarDados() {
+        try {
             Usuario objeto = new Usuario();
-            
+
             objeto.setLogin(txtLogin_tela_usuario.getText().trim());
             objeto.setNome(txtNome_tela_usuario.getText().trim());
             objeto.setSenha(pass1_tela_usuario.getText());
+            //objeto.setId( Integer.parseInt(lblId.getText()));
             return objeto;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
     
+     private Usuario guardarDadosUpdate() {
+        try {
+            Usuario objeto = new Usuario();
+
+            objeto.setLogin(txtLogin_tela_usuario.getText().trim());
+            objeto.setNome(txtNome_tela_usuario.getText().trim());
+            objeto.setSenha(pass1_tela_usuario.getText());
+            objeto.setId( Integer.parseInt(lblId.getText()));
+            return objeto;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     private void atualizarTabela() {
         try {
 
+            UsuarioConttroler objUsuarioController = new UsuarioConttroler();
 
-           UsuarioConttroler objUsuarioController = new UsuarioConttroler();
-            
-           
             objUsuarioController.preencher(jtbUsuarios);
-
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
         }
     }
-    
-    
-    
+
+
     private void txtNome_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNome_tela_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNome_tela_usuarioActionPerformed
-    
+
     /*
-    //BOTAO PARA EXCLUIR USUARIOS UTILIZANDO O ID
-    private void btnExcluirUsuario_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUsuario_tela_usuarioActionPerformed
-        try{
-            Usuario usuario = guardarId();
-            
-            
-            
-            UsuarioConttroler cont = new UsuarioConttroler();
-            
-            cont.excluir(usuario);
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario excluido com sucesso");
-            initComponents();
-            txtexcluirUsuarioById_tela_usuarios.setText("");
-            
-            
-        }catch(Exception e){
-             System.out.println("Erro" +e.getMessage());
-            
-        }
-        
-        
-    }//GEN-LAST:event_btnExcluirUsuario_tela_usuarioActionPerformed
-    */
+    //BOTAO PARA EXCLUIR USUARIOS UTILIZANDO O ID    */
     private void pass2_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass2_tela_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pass2_tela_usuarioActionPerformed
@@ -349,20 +316,18 @@ public class TelaUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
 
-
             //pega a linha selecionada
             int linhaSelecionada = jtbUsuarios.getSelectedRow();
 
-
             // Primeira coluna da linha
             String codigo = jtbUsuarios.getModel().getValueAt(linhaSelecionada, 0).toString();
-
 
             //Verifica se clicou na coluna 3 => EXCLUIR
             //buscar no banco de dados o registro e preencher nos campos da tela
             objUsuarioConttroler = new UsuarioConttroler();
             Usuario objeto = objUsuarioConttroler.buscar(codigo);
-                
+
+            //exluir usuario na lista coluna selecionada 2 (0-1-2)
             if (jtbUsuarios.isColumnSelected(2)) {
                 try {
                     boolean wPergunta = CaixaDeDialogo.obterinstancia()
@@ -371,18 +336,16 @@ public class TelaUsuarios extends javax.swing.JFrame {
                         //exclusão do registro selecionado
                         objUsuarioConttroler = new UsuarioConttroler();
                         boolean retorno = objUsuarioConttroler.excluir(codigo);
-                        if(retorno){
+                        if (retorno) {
                             atualizarTabela();
                             CaixaDeDialogo.obterinstancia().exibirMensagem("Registro excluído com sucesso");
-                            
-                        }else{
+
+                        } else {
                             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir");
                         }
                     }
 
-
                     atualizarTabela();
-
 
                 } catch (Exception ex) {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
@@ -393,22 +356,22 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 }
             }
 
-
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), 'e');
         }
     }//GEN-LAST:event_jtbUsuariosMousePressed
-    
-    private void preencherCampos(Usuario objeto){
-        try{
+
+    private void preencherCampos(Usuario objeto) {
+        try {
             lblId.setText(String.valueOf(objeto.getId()));
             txtLogin_tela_usuario.setText(objeto.getLogin());
             txtNome_tela_usuario.setText(objeto.getNome());
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-    
+
+    /*
     private Usuario guardarId(){
         try{
         Usuario objeto = new Usuario();
@@ -421,39 +384,37 @@ public class TelaUsuarios extends javax.swing.JFrame {
         }
         
     }
-    
-    private boolean validarDados(){
-        
-        if(txtNome_tela_usuario.getText().trim().equals("")){
+     */
+    private boolean validarDados() {
+
+        if (txtNome_tela_usuario.getText().trim().equals("")) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um Nome");
             return false;
         }
-        if(txtLogin_tela_usuario.getText().trim().equals("")){
+        if (txtLogin_tela_usuario.getText().trim().equals("")) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um Login");
             return false;
         }
-        
+
         int indice = txtLogin_tela_usuario.getText().indexOf(" ");
-       if(indice >= 0){
-           CaixaDeDialogo.obterinstancia().exibirMensagem("Login sem espaços");
-       }
-       if(pass1_tela_usuario.getText().trim().equals("")){
+        if (indice >= 0) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Login sem espaços");
+        }
+        if (pass1_tela_usuario.getText().trim().equals("")) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Senha 1 em branco");
             return false;
         }
-       if(pass2_tela_usuario.getText().trim().equals("")){
+        if (pass2_tela_usuario.getText().trim().equals("")) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Senha 2 em branco");
             return false;
         }
-       if(!pass1_tela_usuario.getText().trim().equals(pass2_tela_usuario.getText())){
+        if (!pass1_tela_usuario.getText().trim().equals(pass2_tela_usuario.getText())) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Senha 1 em branco");
             return false;
         }
-       
-       return true;
-            
-        
-        
+
+        return true;
+
         /*if(txtLogin_tela_usuario.equals("")){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um Login");
             return false;
@@ -472,10 +433,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
         }
         
             return true;
-        */
+         */
     }
-        
-    
+
     /**
      * @param args the command line arguments
      */
@@ -506,31 +466,27 @@ public class TelaUsuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new TelaUsuarios().setVisible(true);
-                
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnExcluirUsuario_tela_usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbUsuarios;
     private javax.swing.JLabel lblId;
     private javax.swing.JPasswordField pass1_tela_usuario;
     private javax.swing.JPasswordField pass2_tela_usuario;
-    private javax.swing.JLabel txtExcluir_tela_usuarios;
     private javax.swing.JTextField txtLogin_tela_usuario;
     private javax.swing.JTextField txtNome_tela_usuario;
-    private javax.swing.JTextField txtexcluirUsuarioById_tela_usuarios;
     // End of variables declaration//GEN-END:variables
 }
