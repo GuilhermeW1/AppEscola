@@ -23,8 +23,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
     public TelaUsuarios() {
         initComponents();
         atualizarTabela();
-        System.out.println(" lblid "+lblId.getText());
-        
+       
 
     }
 
@@ -207,8 +206,15 @@ public class TelaUsuarios extends javax.swing.JFrame {
         Usuario usuario;
         UsuarioConttroler objController;
 
+        /*esta e a verificaçao para saber se o usuario esta '
+        criando ou alterando ele busca a labl id da tela que esta setada como "ID"
+        a tela sempre estara limpa sendo assim o lblId sempre estara setada como id, o que fara 
+        com que usuario seja direcionado para a condiçao de criar um novo usuario
+        se o usuario clicar na lista ele seta o id do ususario selecionado automaticamente
+        sendo assim essa verificaçao cai no else 
+         */
         if (lblId.getText().equals("ID")) {
-            
+
             System.out.println("criando");
             boolean retorno = validarDados();
             if (retorno) {
@@ -226,32 +232,29 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 }
             }
 
-            
-            ///////////////
-            
-           
-
         } else {
-             boolean retorno = validarDados();
-            if (retorno) {
-                System.out.println("Alterando");
+            
+            
+            
+           // boolean retorno = validarDados();
+           // if (retorno) {
+                
                 usuario = guardarDadosUpdate();
                 objController = new UsuarioConttroler();
-                if(objController.alterar(usuario) == true){
+                if (objController.alterar(usuario) == true) {
                     limparTela();
                     atualizarTabela();
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Usuario alterado com sucesso");
-                }else{
+                } else {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar usuario");
                 }
-                
 
-            }
+           // }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
     }
-
+    //Limpa a tela deichando todos os campos em branco
     public void limparTela() {
         lblId.setText("ID");
         txtLogin_tela_usuario.setText("");
@@ -260,7 +263,8 @@ public class TelaUsuarios extends javax.swing.JFrame {
         pass1_tela_usuario.setText("");
         pass2_tela_usuario.setText("");
     }
-
+    
+    //este metodo slva os dados em um novo objeto usuario 
     private Usuario guardarDados() {
         try {
             Usuario objeto = new Usuario();
@@ -275,16 +279,23 @@ public class TelaUsuarios extends javax.swing.JFrame {
         }
     }
     
-     private Usuario guardarDadosUpdate() {
+    /*
+    este metodo salva os dados em um novo objeto assim como o outro
+    porem este metodo tambem guarda o id do usuario buscado que e usado 
+    para fazer o update de um usuario ja existente 
+    */
+    private Usuario guardarDadosUpdate() {
         try {
             Usuario objeto = new Usuario();
 
             objeto.setLogin(txtLogin_tela_usuario.getText().trim());
             objeto.setNome(txtNome_tela_usuario.getText().trim());
             objeto.setSenha(pass1_tela_usuario.getText());
-            objeto.setId( Integer.parseInt(lblId.getText()));
+            objeto.setId(Integer.parseInt(lblId.getText()));
             return objeto;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            return null;
+        }catch(Exception e){
             return null;
         }
     }
@@ -311,7 +322,13 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private void pass2_tela_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pass2_tela_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pass2_tela_usuarioActionPerformed
-
+    
+    
+    /*
+    este é o metodo responsavel por toda a tabela de usuarios 
+    desde configurar as linhas em cores diferentes 
+    como tambem buscar e exibir todos os usarios no banco de dados 
+    */
     private void jtbUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbUsuariosMousePressed
         // TODO add your handling code here:
         try {
@@ -370,21 +387,10 @@ public class TelaUsuarios extends javax.swing.JFrame {
 
         }
     }
-
+    
     /*
-    private Usuario guardarId(){
-        try{
-        Usuario objeto = new Usuario();
-           
-        objeto.setId(Integer.parseInt(txtexcluirUsuarioById_tela_usuarios.getText()));
-        return objeto;
-        }catch(NumberFormatException e){
-            System.out.println("guardarID ERRO: "+e.getMessage());
-            return null;
-        }
-        
-    }
-     */
+    este metodo valida os dados na hora criaçao de um novo  usuario
+    */
     private boolean validarDados() {
 
         if (txtNome_tela_usuario.getText().trim().equals("")) {
@@ -415,25 +421,6 @@ public class TelaUsuarios extends javax.swing.JFrame {
 
         return true;
 
-        /*if(txtLogin_tela_usuario.equals("")){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um Login");
-            return false;
-        }else if(txtNome_tela_usuario.equals("")){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um nome");
-            return false;
-        }else if(pass1_tela_usuario.equals("")){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe uma senha");
-            return false;
-        }else if(pass2_tela_usuario.equals("")){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe uma senha");
-            return false;
-        }else if(pass1_tela_usuario != pass2_tela_usuario){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Senha um diferente da senha 2");
-            return false;
-        }
-        
-            return true;
-         */
     }
 
     /**
@@ -465,6 +452,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            //@Override -- ta dando erro nisso aqui originalmente nao tava aqui nao
             public void run() {
 
                 new TelaUsuarios().setVisible(true);

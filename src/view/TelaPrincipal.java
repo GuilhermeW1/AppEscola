@@ -37,7 +37,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuUsuarios_tela_principal = new javax.swing.JMenuItem();
         menuSair_tela_principal = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Cadastros");
 

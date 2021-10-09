@@ -28,7 +28,7 @@ public class Conexao {
             
             Connection con = getConnection();
             stmt = con.createStatement();
-            System.out.print("Conexão com Banco de Dados Criada!");
+           // System.out.print("Conexão com Banco de Dados Criada!");
         } catch (SQLException ex) {
             System.out.print(ex);
         }

@@ -9,6 +9,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import controller.UsuarioConttroler;
 import database.Conexao;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import tools.CaixaDeDialogo;
 import tools.Tools;
 
@@ -142,29 +143,33 @@ public class Tela_login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    botão de login da tela de usuarios 
+    ele valida se o usuario escreveu algum de seus dados com aspas 
+    isso e feito como medida de segurança para evitar hackings utilizando sql injection
+     */
     private void btn_logar_tela_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logar_tela_loginActionPerformed
-        try{
-        String user = txt_usuario_tela_login.getText().trim();
-        user = user.replaceAll("'", "");
-        String pass = Tools.converterCharArrayToString(txt_senha_tela_login.getPassword()).trim();
-        pass = pass.replaceAll("'", "");
+        try {
+            String user = txt_usuario_tela_login.getText().trim();
+            user = user.replaceAll("'", "");
+            String pass = Tools.converterCharArrayToString(txt_senha_tela_login.getPassword()).trim();
+            pass = pass.replaceAll("'", "");
 
             UsuarioConttroler controller = new UsuarioConttroler();
-           
+
             boolean existe = controller.login(user, pass);
-            if(existe){
-               TelaPrincipal tela = new TelaPrincipal();
-               tela.setVisible(true);
-               dispose();//fecha a tela
+            if (existe) {
+                TelaPrincipal tela = new TelaPrincipal();
+                tela.setVisible(true);
+                dispose();//fecha a tela
             }
-        
-        }catch(Exception e ){
+
+        } catch (Exception e) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("SUCESSO");
-            CaixaDeDialogo.obterinstancia()
-                    .exibirMensagem(e.getMessage(), "Erro", 'e');
-            
+            CaixaDeDialogo.obterinstancia().exibirMensagem(e.getMessage(), "Erro", 'e');
+
         }
-            
+
     }//GEN-LAST:event_btn_logar_tela_loginActionPerformed
 
     /**
@@ -193,12 +198,13 @@ public class Tela_login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Tela_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        try{
-         UIManager.setLookAndFeel(new FlatLightLaf());
-        }catch(Exception e){System.out.println("Erro na troda de tema"); }
-        
-        
+
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            System.out.println("Erro na troca de tema");
+        }
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
