@@ -16,6 +16,7 @@ public class Usuario {
     private String login;
     private String senha;
     private boolean excluir;
+    private int id_bairros;
 
     public boolean isExcluir() {
         return excluir;
@@ -57,6 +58,19 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public int getId_bairros() {
+        return id_bairros;
+    }
+
+    public void setId_bairros(int id_bairros) {
+        this.id_bairros = id_bairros;
+    }
+
+    
+
+    
+    
     
     
     

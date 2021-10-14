@@ -73,13 +73,24 @@ public class UsuarioConttroler {
             if (verificarExistencia(objeto) == true) {
                 return false;
             } else {
-
-                String wSQL = "INSERT INTO usuarios values(default, ?, ?, md5(md5(encode(?::bytea, 'base64'))), false)";
+                /*
+                String wSQL = "INSERT INTO usuarios values(default, ?, ?, md5(md5(encode(?::bytea, 'base64'))), false, ?)";
                 stmt = con.prepareStatement(wSQL);
                 stmt.setString(1, objeto.getNome());
                 stmt.setString(2, objeto.getLogin());
                 stmt.setString(3, objeto.getSenha());
+                stmt.setInt(4, objeto.getId_Bairro());
                 
+
+                stmt.executeUpdate();
+                */
+                
+                String wSQL = " INSERT INTO usuarios VALUES(DEFAULT, ?, ?, md5(encode(?::bytea, 'base64')), false, ?) ";
+                stmt = con.prepareStatement(wSQL);
+                stmt.setString(1, objeto.getNome());    
+                stmt.setString(2, objeto.getLogin());            
+                stmt.setString(3, objeto.getSenha());            
+                stmt.setInt(4, objeto.getId_bairros());   
 
                 stmt.executeUpdate();
                 return true;
@@ -105,19 +116,63 @@ public class UsuarioConttroler {
             if (!verificarExistencia(objeto) == true) {
                 return false;
             } else {
-
-                String wSQL = "update usuarios set nome = ?, senha = md5(md5(encode(?::bytea, 'base64'))) where id = ?";
+                
+                 String wSQL = " UPDATE usuarios ";
+                wSQL += " SET nome = ? ";
+                if(!objeto.getSenha().equals("")){ //senha está preenchida?
+                    wSQL += " ,senha = md5(encode(?::bytea, 'base64')) ";
+                }
+                wSQL += " ,id_bairros = ? ";
+                wSQL += " WHERE id = ? ";
+                
+                stmt = con.prepareStatement(wSQL);
+                stmt.setString(1, objeto.getNome()); 
+                
+                if(!objeto.getSenha().equals("")){//senha está preenchida?
+                    stmt.setString(2, objeto.getSenha());                   
+                    stmt.setInt(3, objeto.getId_bairros());               
+                    stmt.setInt(4, objeto.getId()); 
+                    System.out.println(" Nome  "+ objeto.getNome());
+                    System.out.println(" Login  "+ objeto.getLogin());
+                    System.out.println(" Senha  "+ objeto.getSenha());
+                    System.out.println(" Id bairro  "+ objeto.getId_bairros());
+                    System.out.println(" Id  "+ objeto.getId());
+                }else{
+                    stmt.setInt(2, objeto.getId_bairros()); 
+                    stmt.setInt(3, objeto.getId()); 
+                     System.out.println(" Nome  "+ objeto.getNome());
+                    System.out.println(" Login  "+ objeto.getLogin());
+                    //System.out.println(" Senha  "+ objeto.getSenha());
+                    System.out.println(" Id bairro  "+ objeto.getId_bairros());
+                    System.out.println(" Id  "+ objeto.getId());
+                }
+                
+                stmt.executeUpdate();
+                return true;
+            }
+                
+            
+                
+                
+                
+                
+                /*
+                
+                String wSQL = "update usuarios set nome = ?, senha = md5(md5(encode(?::bytea, 'base64'))), id_bairros = ?, where id = ?";
                 stmt = con.prepareStatement(wSQL);
                 stmt.setString(1, objeto.getNome());
                 stmt.setString(2, objeto.getSenha());
-                stmt.setInt(3, objeto.getId());
+                stmt.setInt(3, objeto.getId_bairros());
+                stmt.setInt(4, objeto.getId());
                 
 
                 stmt.executeUpdate();
                 return true;
+            
             }
+            */
         } catch (SQLException e) {
-            System.out.println("erro sql: " + e.getMessage());
+            System.out.println("erro sql: " + e.getMessage() +" ====== "+ e.getSQLState() + e.getLocalizedMessage());
             return false;
         } catch (Exception e) {
             System.out.println("Erro " + e.getMessage());
@@ -302,6 +357,7 @@ public class UsuarioConttroler {
                 objUsuario.setLogin(rs.getString("login"));
                 objUsuario.setSenha(rs.getString("senha"));
                 objUsuario.setExcluir(rs.getBoolean("excluido"));
+                objUsuario.setId_bairros(rs.getInt("id_bairros"));
                 
             }
             
