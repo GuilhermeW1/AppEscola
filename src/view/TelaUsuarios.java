@@ -6,8 +6,10 @@
 package view;
 
 import controller.UsuarioConttroler;
+import java.sql.SQLException;
 import model.Usuario;
 import tools.CaixaDeDialogo;
+import tools.Combos;
 
 /**
  *
@@ -19,11 +21,21 @@ public class TelaUsuarios extends javax.swing.JFrame {
      * Creates new form TelaUsuarios
      */
     UsuarioConttroler objUsuarioConttroler;
-
+    Combos comboBairros;
+    
     public TelaUsuarios() {
         initComponents();
+        
         atualizarTabela();
-       
+        comboBairros = new Combos(jC_Bairros_telausuarios);
+        
+        try{
+        comboBairros.PreencheCombo("select id, nome from bairros order by nome");
+        }catch(SQLException E){
+            System.out.println("erro combos" + E.getMessage());
+        }
+        
+       limparTela();
 
     }
 
@@ -50,6 +62,8 @@ public class TelaUsuarios extends javax.swing.JFrame {
         pass2_tela_usuario = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         lblId = new javax.swing.JLabel();
+        jC_Bairros_telausuarios = new javax.swing.JComboBox<>();
+        lblBairro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,7 +75,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nome", "Excluir", "Title 4"
             }
         ));
         jtbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,6 +125,15 @@ public class TelaUsuarios extends javax.swing.JFrame {
         lblId.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         lblId.setText("ID");
 
+        jC_Bairros_telausuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jC_Bairros_telausuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jC_Bairros_telausuariosActionPerformed(evt);
+            }
+        });
+
+        lblBairro.setText("Bairro");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -123,46 +146,60 @@ public class TelaUsuarios extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(136, 136, 136))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNome_tela_usuario)
-                                    .addComponent(txtLogin_tela_usuario)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel1))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(101, 101, 101)
-                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(pass1_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(53, 53, 53))))
+                                    .addComponent(pass2_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(53, 53, 53))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(136, 136, 136))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(txtNome_tela_usuario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jC_Bairros_telausuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblBairro)
+                                .addContainerGap())))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel6)
-                .addGap(43, 43, 43)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblId))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(lblId)))
                 .addGap(18, 18, 18)
                 .addComponent(txtNome_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblBairro))
                 .addGap(35, 35, 35)
-                .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLogin_tela_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jC_Bairros_telausuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -272,9 +309,13 @@ public class TelaUsuarios extends javax.swing.JFrame {
             objeto.setLogin(txtLogin_tela_usuario.getText().trim());
             objeto.setNome(txtNome_tela_usuario.getText().trim());
             objeto.setSenha(pass1_tela_usuario.getText());
-            //objeto.setId( Integer.parseInt(lblId.getText()));
+            
+            
+            Combos c = (Combos) jC_Bairros_telausuarios.getSelectedItem();
+            objeto.setId_Bairro(Integer.parseInt(c.getCodigo()));
             return objeto;
         } catch (Exception e) {
+            System.out.println("erro guardar dados " +e.getMessage());
             return null;
         }
     }
@@ -378,6 +419,10 @@ public class TelaUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtbUsuariosMousePressed
 
+    private void jC_Bairros_telausuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jC_Bairros_telausuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jC_Bairros_telausuariosActionPerformed
+
     private void preencherCampos(Usuario objeto) {
         try {
             lblId.setText(String.valueOf(objeto.getId()));
@@ -463,6 +508,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jC_Bairros_telausuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -471,6 +517,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbUsuarios;
+    private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblId;
     private javax.swing.JPasswordField pass1_tela_usuario;
     private javax.swing.JPasswordField pass2_tela_usuario;
