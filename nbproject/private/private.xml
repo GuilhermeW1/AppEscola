@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/guiaw/NetBeans_Projects/App/src/view/TelaPrincipal.java</file>
             <file>file:/C:/Users/guiaw/NetBeans_Projects/App/src/controller/UsuarioConttroler.java</file>
+            <file>file:/C:/Users/guiaw/NetBeans_Projects/App/src/model/Usuario.java</file>
             <file>file:/C:/Users/guiaw/NetBeans_Projects/App/src/view/TelaUsuarios.java</file>
+            <file>file:/C:/Users/guiaw/NetBeans_Projects/App/src/database/Conexao.java</file>
             <file>file:/C:/Users/guiaw/NetBeans_Projects/App/src/view/Tela_login.java</file>
+            <file>file:/C:/Users/guiaw/NetBeans_Projects/App/src/tools/Tools.java</file>
         </group>
     </open-files>
 </project-private>

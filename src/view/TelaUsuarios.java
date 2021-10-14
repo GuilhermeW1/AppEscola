@@ -415,7 +415,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
             return false;
         }
         if (!pass1_tela_usuario.getText().trim().equals(pass2_tela_usuario.getText())) {
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Senha 1 em branco");
+            CaixaDeDialogo.obterinstancia().exibirMensagem("As senhas não estão iguais");
             return false;
         }
 
